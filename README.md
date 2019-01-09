@@ -10,5 +10,4 @@ This project is to expand it to 64KB (FLASH_V123).
 
 ## Dependency
 
-* 512kbit FLASH Library
-* 256kbit SRAM High Speed Access Library
+AGB Game Pak Backup Library
