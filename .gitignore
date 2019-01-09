@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# 256kbit SRAM Library Header
+AgbSram.h
+
+# 512kbit FLASH Library Header
+AgbFlash.h
