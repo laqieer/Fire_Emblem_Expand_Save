@@ -2,23 +2,17 @@
 by laqieer
 2019-1-10*/
 
-flash_sector_buffer = 0x2040000 - 4096;
-gFlashTimerIntrFunc = flash_sector_buffer - 4;
+GamePakWaitstateControl = 0x4000204;
 
-memcpy = 0x80D6908 + 1;
+FLASH_BASE_HI = 0xE005555;
+FLASH_BASE_LO = 0xE002AAA;
 
 SECTIONS
 {
 	. = 0x8000000;
 	.rom (COPY): {KEEP(*.o(.rom))}
-	. = 0x80D64AC;
-	.SetSramFastFunc_Flash : {*.o(.SetSramFastFunc_Flash)}
-	. = 0x80D63E0;
-	.ReadSramFast_Flash : {*.o(.ReadSramFast_Flash)}
 	. = 0x80D6420;
 	.WriteSramFast_Flash : {*.o(.WriteSramFast_Flash)}
-	. = 0x80D6460;
-	.VerifySramFast_Flash : {*.o(.VerifySramFast_Flash)}
 	. = 0x9000000;	
 	.text : {*(.text)}
 	.rodata : {*(.rodata) . = ALIGN(4);}
