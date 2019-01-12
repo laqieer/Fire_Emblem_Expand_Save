@@ -3,6 +3,8 @@
 __attribute__((section(".libraryIdentifier")))
 const char libraryIdentifier[] = "FLASH_V123";
 
+void (**FlashTimerIntrFunc)(void) = NULL;
+
 void WriteFlash(u8 *src, u8 *dst, u32 size)
 {
 	u8 sector_buffer[SECTOR_SIZE];
@@ -21,6 +23,8 @@ void WriteFlash(u8 *src, u8 *dst, u32 size)
 	
 	sector_number_start = (addr_Flash - FLASH_ADR) / flash->sector.size;
 	sector_number_end = (addr_Flash + size - 1 - FLASH_ADR) / flash->sector.size;
+	
+	SetFlashTimerIntr(2, FlashTimerIntrFunc);
 	
 	// start sector
     if(addr_Flash + size > FLASH_ADR + flash->sector.size * (sector_number_start + 1))
