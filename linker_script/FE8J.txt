@@ -21,6 +21,8 @@ SECTIONS
 	.callWriteFlash : {*.o(.callWriteFlash)}
 	. = 0x80D64AC;
 	.callIdentifyFlash : {*.o(.callIdentifyFlash)}
+	. = 0x8577378;
+	.libraryIdentifier : {*.o(.libraryIdentifier)}
 	. = 0x9000000;	
 	.text : {*(.text)}
 	.rodata : {*(.rodata) . = ALIGN(4);}

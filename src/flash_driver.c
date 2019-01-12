@@ -1,5 +1,8 @@
 #include "flash_driver.h"
 
+__attribute__((section(".libraryIdentifier")))
+const char libraryIdentifier[] = "FLASH_V123";
+
 void WriteFlash(u8 *src, u8 *dst, u32 size)
 {
 	u8 sector_buffer[SECTOR_SIZE];
