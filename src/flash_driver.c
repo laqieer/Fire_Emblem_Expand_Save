@@ -19,28 +19,28 @@ void WriteFlash(u8 *src, u8 *dst, u32 size)
 	if(addr_Flash < FLASH_ADR || addr_Flash + size > FLASH_ADR + FLASH_SIZE || size == 0)
 		return;
 	
-	sector_number_start = (addr_Flash - FLASH_ADR) / SECTOR_SIZE;
-	sector_number_end = (addr_Flash + size - 1 - FLASH_ADR) / SECTOR_SIZE;
+	sector_number_start = (addr_Flash - FLASH_ADR) / flash->sector.size;
+	sector_number_end = (addr_Flash + size - 1 - FLASH_ADR) / flash->sector.size;
 	
 	// start sector
-    if(addr_Flash + size > FLASH_ADR + SECTOR_SIZE * (sector_number_start + 1))
-        byte_number = FLASH_ADR + SECTOR_SIZE * (sector_number_start + 1) - addr_Flash;
+    if(addr_Flash + size > FLASH_ADR + flash->sector.size * (sector_number_start + 1))
+        byte_number = FLASH_ADR + flash->sector.size * (sector_number_start + 1) - addr_Flash;
     else
         byte_number = size;
-    ReadFlash(sector_number_start, 0, sector_buffer, SECTOR_SIZE);
-    memcpy(&sector_buffer[addr_Flash - FLASH_ADR - SECTOR_SIZE * sector_number_start], src, byte_number);
+    ReadFlash(sector_number_start, 0, sector_buffer, flash->sector.size);
+    memcpy(&sector_buffer[addr_Flash - FLASH_ADR - flash->sector.size * sector_number_start], src, byte_number);
     (*ProgramFlashSector)(sector_number_start, sector_buffer);
     
     // middle sectors
     if(sector_number_end > sector_number_start + 1)
         for(i = sector_number_start + 1; i <= sector_number_end - 1; i++)
-            (*ProgramFlashSector)(i, src + byte_number + SECTOR_SIZE * (i - sector_number_start - 1));
+            (*ProgramFlashSector)(i, src + byte_number + flash->sector.size * (i - sector_number_start - 1));
     
     // end sector
     if(sector_number_end > sector_number_start)
     {
-        ReadFlash(sector_number_end, 0, sector_buffer, SECTOR_SIZE);
-        memcpy(sector_buffer, src + byte_number + SECTOR_SIZE * (sector_number_end - sector_number_start - 1), size - byte_number - SECTOR_SIZE * (sector_number_end - sector_number_start - 1));
+        ReadFlash(sector_number_end, 0, sector_buffer, flash->sector.size);
+        memcpy(sector_buffer, src + byte_number + flash->sector.size * (sector_number_end - sector_number_start - 1), size - byte_number - flash->sector.size * (sector_number_end - sector_number_start - 1));
         (*ProgramFlashSector)(sector_number_end, sector_buffer);
     }
 }
@@ -53,7 +53,7 @@ void callWriteFlash(u8 *src, u8 *dst, u32 size)
 
 void ReadFlash_Wrapper(u8 *src, u8 *dst, u32 size)
 {
-	ReadFlash(((u32)src - FLASH_ADR) / SECTOR_SIZE, ((u32)src - FLASH_ADR) % SECTOR_SIZE, dst, size);
+	ReadFlash(((u32)src - FLASH_ADR) / flash->sector.size, ((u32)src - FLASH_ADR) % flash->sector.size, dst, size);
 }
 
 __attribute__((section(".callIdentifyFlash")))
