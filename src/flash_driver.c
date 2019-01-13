@@ -32,7 +32,7 @@ void WriteFlash(u8 *src, u8 *dst, u32 size)
     else
         byte_number = size;
     ReadFlash(sector_number_start, 0, sector_buffer, flash->sector.size);
-    memcpy(&sector_buffer[addr_Flash - FLASH_ADR - flash->sector.size * sector_number_start], src, byte_number);
+    gba_memcpy(&sector_buffer[addr_Flash - FLASH_ADR - flash->sector.size * sector_number_start], src, byte_number);
     (*ProgramFlashSector)(sector_number_start, sector_buffer);
     
     // middle sectors
@@ -44,7 +44,7 @@ void WriteFlash(u8 *src, u8 *dst, u32 size)
     if(sector_number_end > sector_number_start)
     {
         ReadFlash(sector_number_end, 0, sector_buffer, flash->sector.size);
-        memcpy(sector_buffer, src + byte_number + flash->sector.size * (sector_number_end - sector_number_start - 1), size - byte_number - flash->sector.size * (sector_number_end - sector_number_start - 1));
+        gba_memcpy(sector_buffer, src + byte_number + flash->sector.size * (sector_number_end - sector_number_start - 1), size - byte_number - flash->sector.size * (sector_number_end - sector_number_start - 1));
         (*ProgramFlashSector)(sector_number_end, sector_buffer);
     }
 }

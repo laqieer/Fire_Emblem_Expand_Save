@@ -2,7 +2,7 @@
 // by laqieer
 // 2019-1-11
 
-#include <string.h>
+#include "gba_memcpy.h"
 
 #include "AgbFlash.h"
 #include "AgbSramFast.h"
