@@ -14,7 +14,8 @@ VerifySramFast = 0x3006794;
 SECTIONS
 {
 	. = 0x8000000;
-	.rom (COPY): {KEEP(*.o(.rom))}
+/*	.rom (COPY): {KEEP(*.o(.rom))} */
+	.rom : {*(.rom)}
 	. = 0x80D6420;
 /*	.WriteSramFast_Flash : {*.o(.WriteSramFast_Flash)} */
 	.callWriteFlash : {*.o(.callWriteFlash)}
