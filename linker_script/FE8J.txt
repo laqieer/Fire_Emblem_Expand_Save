@@ -18,14 +18,14 @@ SECTIONS
 	. = 0x80D6420;
 /*	.WriteSramFast_Flash : {*.o(.WriteSramFast_Flash)} */
 	.callWriteFlash : {*.o(.callWriteFlash)}
-/*	. = 0x80D64AC;
-	.callIdentifyFlash : {*.o(.callIdentifyFlash)} */
+	. = 0x80D64AC;
+	.callIdentifyFlash : {*.o(.callIdentifyFlash)} 
 	. = 0x8577378;	
 	.libraryIdentifier : {*.o(.libraryIdentifier)}
 	. = 0x9000000;	
 	.text : {*(.text)}
 	.rodata : {*(.rodata) . = ALIGN(4);}
-/*	. = 0x2040000 - 1024;
+	. = 0x2040000 - 1024;
 	.data : {*(.data) . = ALIGN(4);}
-	.bss : {*(.bss) . = ALIGN(4);}	*/
+	.bss : {*(.bss) . = ALIGN(4);}	
 }
