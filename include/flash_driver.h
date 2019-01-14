@@ -18,4 +18,4 @@ void callWriteFlash(u8 *src,u8 *dst,u32 size);
 u16 callIdentifyFlash();
 
 void ReadFlash_Wrapper(u8 *src, u8 *dst, u32 size);
-u32 VerifyFlash_Wrapper(u16 secNo,u8 *src);
+u32 VerifyFlash_Wrapper(u8 *src,u8 *tgt,u32 size);

@@ -7,7 +7,7 @@ void (**FlashTimerIntrFunc)(void) = NULL;
 
 void WriteFlash(u8 *src, u8 *dst, u32 size)
 {
-	u8 sector_buffer[SECTOR_SIZE];
+	u8 sector_buffer[4096];
 	u32 addr_WRAM;
 	u32 addr_Flash;
 	u32 byte_number;
@@ -61,7 +61,7 @@ void ReadFlash_Wrapper(u8 *src, u8 *dst, u32 size)
 }
 
 // omit for speed
-u32 VerifyFlash_Wrapper(u16 secNo,u8 *src)
+u32 VerifyFlash_Wrapper(u8 *src,u8 *tgt,u32 size)
 {
 	return 0;
 }
