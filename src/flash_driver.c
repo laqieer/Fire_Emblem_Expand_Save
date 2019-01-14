@@ -60,10 +60,16 @@ void ReadFlash_Wrapper(u8 *src, u8 *dst, u32 size)
 	ReadFlash(((u32)src - FLASH_ADR) / flash->sector.size, ((u32)src - FLASH_ADR) % flash->sector.size, dst, size);
 }
 
+// omit for speed
+u32 VerifyFlash_Wrapper(u16 secNo,u8 *src)
+{
+	return 0;
+}
+
 __attribute__((section(".callIdentifyFlash")))
 u16 callIdentifyFlash()
 {
 	ReadSramFast = ReadFlash_Wrapper;
-	VerifySramFast = VerifyFlashSector_Core;
+	VerifySramFast = VerifyFlash_Wrapper;
 	return IdentifyFlash();
 }
