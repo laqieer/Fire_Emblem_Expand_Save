@@ -1,5 +1,8 @@
 #include "SRAM_Flash.h"
 
+__attribute__((section(".libraryIdentifier")))
+const char libraryIdentifier[] = "FLASH_Vnnn";
+
 void WriteSramFast_Flash_Core(unsigned char *src, unsigned char *dst, unsigned int size)
 {
 	int i;
