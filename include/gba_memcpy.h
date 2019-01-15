@@ -2,7 +2,7 @@
 // by laqieer
 // 2019-01-13
 
-#include "Agb.h"
+//#include "Agb.h"
 #include <string.h>
 
 // improve performance by GBA BIOS function CPUFastSet.
