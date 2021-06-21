@@ -9,7 +9,7 @@ Fire Emblem on GBA use 32KB save.
 This project is to expand it to 64KB/128KB. The save type is changed to FLASH 512K/1M.
 
 ## Extern library
-* libagbbackup / [libagbflash](https://github.com/laqieer/libagbflash)
+* libagbbackup / [libgbabackup](https://github.com/laqieer/libgbabackup)
 * libgcc & libc in devkitpro
 
 ## Patch versions
